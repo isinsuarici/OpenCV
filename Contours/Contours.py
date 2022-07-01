@@ -1,7 +1,7 @@
 import cv2 as cv
 
 # findContours, drawContours
-img = cv.imread("../input_pictures/input_rect.png")
+img = cv.imread("../input_pictures/input_airpods.png")
 img2 = img.copy()
 # Konturlar, aynı renk veya yoğunluğa sahip tüm sürekli noktaları sınır boyunca birleştiren bir eğridir.
 # Şekil analizi, nesne algılama, tanımada kullanılır.
@@ -12,7 +12,7 @@ img2 = img.copy()
 """findContours"""
 # findContours with CHAIN_APPROX_NONE:
 gray = cv.cvtColor(img, cv.COLOR_RGBA2GRAY)
-cannyEdge = cv.Canny(gray, 30, 200)
+cannyEdge = cv.Canny(gray, 40, 200)
 contours, hierarchy = cv.findContours(cannyEdge, cv.RETR_TREE, cv.CHAIN_APPROX_NONE)
 
 
