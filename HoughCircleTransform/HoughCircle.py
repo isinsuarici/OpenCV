@@ -10,11 +10,10 @@ import numpy as np
 # Yarıçap aratmadan sadece merkezleri döndürmek için maxRadius'u negatif yap.
 
 
-img = cv.imread("../input_pictures/input_money.png")  # read yaparken parama 0 verip sonra blurlarsam false
-# negativeler oldu.
+img = cv.imread("../input_pictures/input_money.png", 0)
 img = cv.GaussianBlur(img, (7, 7), 1.5)  # Bu kısmı idedeki dökümanda özellikle belirtmiş GaussianBlur() with 7x7
 # kernel and 1.5 sigma !!!!! False negatifi baya azalttı.
-img = cv.cvtColor(img, cv.COLOR_RGBA2GRAY)
+cimg = cv.cvtColor(img, cv.COLOR_GRAY2BGR)
 circles = cv.HoughCircles(img, cv.HOUGH_GRADIENT, 1.3, 30, param1=150, param2=80, minRadius=0, maxRadius=0)
 # ide dökümanında param1 için 300 civarı iyi diyor. 60 gibi düşük değerler verdiğimde bazılarını algılayamamıştı.
 # param2 için küçük değerler verince false positive çok artıyor.
@@ -32,8 +31,9 @@ circles = cv.HoughCircles(img, cv.HOUGH_GRADIENT, 1.3, 30, param1=150, param2=80
 circles = np.uint16(np.around(circles))  # circleları yuvarlayıp 16 bitte sakla
 
 for c in circles[0, :]:
-    cv.circle(img, (c[0], c[1]), c[2], (0, 255, 0), 3)
-    cv.circle(img, (c[0], c[1]), 1, (0, 0, 255), 5)  # 3.parametre merkeze çizeceğimiz noktanın yarıçapı
+    cv.circle(cimg, (c[0], c[1]), c[2], (0, 255, 0), 3)
+    cv.circle(cimg, (c[0], c[1]), 1, (0, 0, 255), 5)  # 3.parametre merkeze çizeceğimiz noktanın yarıçapı
 
-cv.imshow("img", img)
+cv.imshow("cimg", cimg)
 cv.waitKey(0)
+cv.imwrite("houghcircle.png", img)
