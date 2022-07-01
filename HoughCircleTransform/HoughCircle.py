@@ -36,4 +36,4 @@ for c in circles[0, :]:
 
 cv.imshow("cimg", cimg)
 cv.waitKey(0)
-cv.imwrite("houghcircle.png", img)
+cv.imwrite("houghcircle.png", cimg)
