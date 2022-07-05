@@ -9,5 +9,5 @@ import cv2 as cv
 # opencv tüm bu işlemlerin cv.Canny fonksiyonu ile yapılabilmesini sağlar.
 
 gray = cv.imread("../input_pictures/input_agac.png", 0)
-edges = cv.Canny(gray, 100, 200) # 2.arg=minVal, 3.arg=maxVal
+edges = cv.Canny(gray, 100, 200)  # 2.arg=minVal, 3.arg=maxVal
 cv.imwrite('edges.png', edges)
