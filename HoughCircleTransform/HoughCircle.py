@@ -9,12 +9,11 @@ import numpy as np
 # Bu yüzden, eğer biliyorsak yarıçap aralığını minRadius ve maxRadius ile belirtmeliyiz!
 # Yarıçap aratmadan sadece merkezleri döndürmek için maxRadius'u negatif yap.
 
-
 img = cv.imread("../input_pictures/input_money.png", 0)
-img = cv.GaussianBlur(img, (7, 7), 1.5)  # Bu kısmı idedeki dökümanda özellikle belirtmiş GaussianBlur() with 7x7
+img = cv.GaussianBlur(img, (7, 7), 1.5)  # Bu kısmı idedeki dökümanda belirtmiş GaussianBlur() with 7x7
 # kernel and 1.5 sigma !!!!! False negatifi baya azalttı.
 cimg = cv.cvtColor(img, cv.COLOR_GRAY2BGR)
-circles = cv.HoughCircles(img, cv.HOUGH_GRADIENT, 1.3, 30, param1=150, param2=80, minRadius=0, maxRadius=0)
+circles = cv.HoughCircles(img, cv.HOUGH_GRADIENT, 1.3, 30, param1=150, param2=70, minRadius=0, maxRadius=0)
 # ide dökümanında param1 için 300 civarı iyi diyor. 60 gibi düşük değerler verdiğimde bazılarını algılayamamıştı.
 # param2 için küçük değerler verince false positive çok artıyor.
 

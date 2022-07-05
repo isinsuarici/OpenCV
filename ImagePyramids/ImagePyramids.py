@@ -1,4 +1,5 @@
 import cv2 as cv
+import sys
 
 # Normalde sabit boyutlu bir görüntü ile çalışıyorduk.
 # Ancak bazı durumlarda aynı görüntünün farklı çözünürlükleriyle çalışmamız gerekir.
@@ -9,7 +10,11 @@ import cv2 as cv
 
 """ 1. Gaussian Pyramids *********************************"""
 
-gray = cv.imread("../input_pictures/input_agac.png")
+gray = cv.imread(cv.samples.findFile("../input_pictures/input_agac.png"))
+
+if gray is None:
+    sys.exit("coulnt read the image")
+
 lower_reso = cv.pyrDown(gray)  # level_1
 cv.imwrite("lower_reso.png", lower_reso)
 
