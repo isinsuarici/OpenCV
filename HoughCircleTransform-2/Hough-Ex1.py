@@ -3,15 +3,17 @@ import numpy as np
 import argparse
 
 # konsoldan çalıştırmak için:
-# python Hough-Ex1.py -i ../input_pictures/soda.png
+# python Hough-Ex1.py -i ../input_pictures/input_money2.png
 
 # minDist çok küçük olursa daire olmayan yerlerde bile daire algılayabiliriz.
 # minDist çok büyük olursa bazı daireleri algılayamayabiliriz
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required=True, help="Path of image")
-args = vars(ap.parse_args())
 
-img = cv.imread(args["image"])
+# ap = argparse.ArgumentParser()
+# ap.add_argument("-i", "--image", required=True, help="Path of image")
+# args = vars(ap.parse_args())
+#
+# img = cv.imread(args["image"])
+img = cv.imread("../input_pictures/input_money2.png")
 img2 = img.copy()  # bu işlemi yaptığım yere göre outputun size'ı(kB) değişiyor.
 
 img = cv.GaussianBlur(img, (7, 7), 1.5)

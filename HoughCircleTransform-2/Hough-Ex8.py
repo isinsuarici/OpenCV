@@ -10,6 +10,7 @@ ap.add_argument("-i", "--image", required=True, help="Path of image")
 args = vars(ap.parse_args())
 
 img = cv.imread(args["image"])
+# img = cv.imread("../input_pictures/input_money2.png")
 img2 = img.copy()
 img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 img = cv.GaussianBlur(img, (7, 7), 1.5)
