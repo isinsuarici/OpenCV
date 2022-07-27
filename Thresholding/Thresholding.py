@@ -8,6 +8,7 @@ cv.imwrite('gray.png', gray)
 """ THRESHOLDING **************************************************************** """
 # 1.Simple Thresholding / Global Thresholding
 x, thresh_simple = cv.threshold(gray, 127, 255, cv.THRESH_BINARY)
+
 y, thresh_simpleLowThresh = cv.threshold(gray, 100, 255, cv.THRESH_BINARY)
 # threshold parametreleri =
 # image, thresh değeri (bu değer aşılmazsa pixel 0 olacak), threshi geçerse 255 olacak, thresh types.

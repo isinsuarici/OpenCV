@@ -3,7 +3,7 @@ import numpy as np
 import argparse
 
 # konsoldan çalıştırmak için:
-# python Hough-Ex2.py -i ../input_pictures/input_bobin.png
+# python Hough-Ex2.py -i ../input_pictures/input_bobin.png ??
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", required=True, help="Path of image")

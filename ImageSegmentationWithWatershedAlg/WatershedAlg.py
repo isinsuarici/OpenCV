@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 # arka planda veya nesne olmadığından emin olduğumuz bölgelere başka bir renk vereceğiz.
 # hakkında hiçbir şeyden emin olmadığımız bölgeleri ise 0 ile etiketleyeceğiz.
 # aardından watershed alg'ını uygulayacağız.
-# markerımız, verdiğimiz etiketlerle güncellenecek ne nesnelerin sınırları
+# markerımız, verdiğimiz etiketlerle güncellenecek ve nesnelerin sınırları
 # -1 olacaktır.
 
 

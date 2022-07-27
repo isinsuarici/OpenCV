@@ -14,7 +14,7 @@ import argparse
 #
 # img = cv.imread(args["image"])
 img = cv.imread("../input_pictures/input_money2.png")
-img2 = img.copy()  # bu işlemi yaptığım yere göre outputun size'ı(kB) değişiyor.
+img2 = img.copy()
 
 img = cv.GaussianBlur(img, (7, 7), 1.5)
 
