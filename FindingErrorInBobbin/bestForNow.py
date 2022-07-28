@@ -28,8 +28,8 @@ gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 img = cv2.GaussianBlur(img, (3, 3), 1.5)
 
 circles = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1.3,
-                           int(2 * height), param1=90, param2=40, minRadius=int(height / 2.4),
-                           maxRadius=int(height / 1.8))
+                           int(2 * hh), param1=90, param2=40, minRadius=int(hh / 2.4),
+                           maxRadius=int(hh / 1.8))
 print("circles:", circles)
 
 img_circle = img.copy()
@@ -46,7 +46,6 @@ for circle in circles[0]:
 ave_color = cv2.mean(img, mask=mask)[:3]
 print("average circle color:", ave_color)  # BGR
 
-# show images
 cv2.imshow('circle', img_circle)
 cv2.imshow('mask', mask)
 cv2.waitKey(0)
@@ -54,23 +53,28 @@ b, g, r = ave_color[:3]
 
 x, thresh_simple = cv2.threshold(gray, 71.17, 255, cv2.THRESH_BINARY)
 
-cv2.imshow('circle result', thresh_simple)
+cv2.imshow('after thresholded', thresh_simple)
 cv2.waitKey(0)
 
 kernel = np.ones((5, 5), np.uint8)
 gradient = cv2.morphologyEx(thresh_simple, cv2.MORPH_GRADIENT, kernel)
-cv2.imshow('gradient', gradient)
+cv2.imshow('after gradient', gradient)
 cv2.waitKey(0)
 kernel = np.ones((9, 9), np.uint8)
 erosion = cv2.erode(gradient, kernel, iterations=1)
-cv2.imshow('erosion', erosion)
+cv2.imshow('after erosion', erosion)
 cv2.waitKey(0)
 
 ms = cv2.subtract(thresh_simple, gradient)
-cv2.imshow('ms', ms)
+cv2.imshow('after substract', ms)
 cv2.waitKey(0)
 
 kernel = np.ones((5, 5), np.uint8)
 dilation = cv2.dilate(ms, kernel, iterations=1)
-cv2.imshow('ress', dilation)
+cv2.imshow('after dilate', dilation)
 cv2.waitKey(0)
+
+# invert için
+# invert_img = 255 - img
+# veya
+# invert_img = cv2.bitwise_not(img) kullanılabilir.

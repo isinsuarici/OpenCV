@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import sys
+
 # kendi kodum değil deneme amaçlı burada bıraktım, yanlış çalışıyor
 
 # initialize global H, S, V values
@@ -28,8 +29,8 @@ h = img.shape[0]
 roi_w = int(w * 0.10)
 roi_h = int(h * 0.10)
 roi_list = []
-roi_list.append( (int(w*0.25), int(h*0.15), roi_w, roi_h) )
-roi_list.append( (int(w*0.25), int(h*0.60), roi_w, roi_h) )
+roi_list.append((int(w * 0.25), int(h * 0.15), roi_w, roi_h))
+roi_list.append((int(w * 0.25), int(h * 0.60), roi_w, roi_h))
 
 # convert image to HSV color space
 hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -41,12 +42,12 @@ for rect in roi_list:
     y2 = y + h
     print('ROI rect=', rect)
 
-    cropped_hsv_img = hsv_img[y:y+h, x:x+w]
+    cropped_hsv_img = hsv_img[y:y + h, x:x + w]
 
     h, s, v = cv2.split(cropped_hsv_img)
-    min_h  = np.min(h)
-    min_s  = np.min(s)
-    min_v  = np.min(v)
+    min_h = np.min(h)
+    min_s = np.min(s)
+    min_v = np.min(v)
 
     if (min_h < min_global_h):
         min_global_h = min_h
@@ -57,9 +58,9 @@ for rect in roi_list:
     if (min_v < min_global_v):
         min_global_v = min_v
 
-    max_h  = np.max(h)
-    max_s  = np.max(s)
-    max_v  = np.max(v)
+    max_h = np.max(h)
+    max_s = np.max(s)
+    max_v = np.max(v)
 
     if (max_h > max_global_h):
         max_global_h = max_h
@@ -71,26 +72,25 @@ for rect in roi_list:
         max_global_v = max_v
 
     # debug: draw ROI in original image
-    cv2.rectangle(dbg_img, (x, y), (x2, y2), (255,165,0), 4) # red
-
+    cv2.rectangle(dbg_img, (x, y), (x2, y2), (255, 165, 0), 4)  # red
 
 cv2.imshow('ROIs', cv2.resize(dbg_img, dsize=(0, 0), fx=0.5, fy=0.5))
-#cv2.waitKey(0)
+# cv2.waitKey(0)
 cv2.imwrite(filename[:-4] + '_rois.png', dbg_img)
 
 # define min/max color for threshold
 low_hsv = np.array([min_h, min_s, min_v])
 max_hsv = np.array([max_h, max_s, max_v])
-#print('low_hsv=', low_hsv)
-#print('max_hsv=', max_hsv)
+# print('low_hsv=', low_hsv)
+# print('max_hsv=', max_hsv)
 
 # threshold image by color
 img_bin = cv2.inRange(hsv_img, low_hsv, max_hsv)
 cv2.imshow('binary', cv2.resize(img_bin, dsize=(0, 0), fx=0.5, fy=0.5))
 cv2.imwrite(filename[:-4] + '_binary.png', img_bin)
 
-#cv2.imshow('img_bin', cv2.resize(img_bin, dsize=(0, 0), fx=0.5, fy=0.5))
-#cv2.waitKey(0)
+# cv2.imshow('img_bin', cv2.resize(img_bin, dsize=(0, 0), fx=0.5, fy=0.5))
+# cv2.waitKey(0)
 
 # create a mask to store the contour of the reel (hopefully)
 mask = np.zeros((img_bin.shape[0], img_bin.shape[1]), np.uint8)
@@ -108,7 +108,7 @@ for contourIdx, cnt in enumerate(contours):
         crop_x, crop_y, crop_w, crop_h = cv2.boundingRect(cnt)
         centers, radius = cv2.minEnclosingCircle(cnt)
 
-        cv2.circle(mask, (int(centers[0]), int(centers[1])), int(radius), (255), -1) # fill with white
+        cv2.circle(mask, (int(centers[0]), int(centers[1])), int(radius), (255), -1)  # fill with white
         break
 
 cv2.imshow('mask', cv2.resize(mask, dsize=(0, 0), fx=0.5, fy=0.5))
@@ -121,7 +121,7 @@ cv2.imwrite(filename[:-4] + '_reel.png', reel_img)
 
 # crop the reel to a smaller image
 if (crop_w != 0 and crop_h != 0):
-    cropped_reel_img = reel_img[crop_y:crop_y+crop_h, crop_x:crop_x+crop_w]
+    cropped_reel_img = reel_img[crop_y:crop_y + crop_h, crop_x:crop_x + crop_w]
     cv2.imshow('cropped_reel_img', cv2.resize(cropped_reel_img, dsize=(0, 0), fx=0.5, fy=0.5))
 
     output_filename = filename[:-4] + '_crop.png'
