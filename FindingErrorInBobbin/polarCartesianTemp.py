@@ -1,7 +1,7 @@
 import cv2 as cv
 import math
 
-img = cv.imread("../input_bobins/with/1.png")
+img = cv.imread("../input_bobins/pure/3.png")
 # resize:
 print('Original Dimensions : ', img.shape)
 if img.shape[0] > 3000 or img.shape[1] > 3000:
@@ -25,9 +25,29 @@ cart_2_polar_flag = cv.WARP_FILL_OUTLIERS
 img_forth = cv.linearPolar(img, img_center, img_radius, cart_2_polar_flag)
 cv.imshow("linear image", img_forth)
 cv.waitKey(0)
-
+'''
 # kartezyene geri çevir:
 polar_2_cart_flag = cv.WARP_INVERSE_MAP
 img_back = cv.linearPolar(img_forth, img_center, img_radius, polar_2_cart_flag)
 cv.imshow("back to cartesian image", img_back)
+cv.waitKey(0)
+'''
+
+# düz basit thresholding
+img_blur = cv.medianBlur(img_forth, 3)
+# cv.imshow('img_blur.png', img_blur)
+x, thresh_binary = cv.threshold(img_blur, 127, 255, cv.THRESH_BINARY)
+cv.imshow('thresh_binary.png', thresh_binary)
+cv.waitKey(0)
+
+# adaptive thresholding - gaussian
+img_forth = cv.cvtColor(img_forth, cv.COLOR_BGR2GRAY)
+# img_forth = cv.medianBlur(img_forth, 11) #noiseu azaltmak için
+thresh_adaptive_gaussian = cv.adaptiveThreshold(img_forth, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 17, 2)
+cv.imshow('thresh_adaptive_gaussian.png', thresh_adaptive_gaussian)
+cv.waitKey(0)
+
+# adaptive thresholding - mean
+thresh_adaptive_mean = cv.adaptiveThreshold(img_forth, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 17, 2)
+cv.imshow('thresh_adaptive_mean.png', thresh_adaptive_mean)
 cv.waitKey(0)

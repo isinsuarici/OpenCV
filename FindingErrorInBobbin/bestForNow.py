@@ -83,13 +83,9 @@ cv2.waitKey(0)
 kernel = np.ones((5, 5), np.uint8)
 dilation = cv2.dilate(ms, kernel, iterations=1)
 
-
-
 # dilation = 255 - dilation
 cv2.imshow('after dilate', dilation)
 cv2.waitKey(0)
-
-
 
 # invert için
 # invert_img = 255 - img

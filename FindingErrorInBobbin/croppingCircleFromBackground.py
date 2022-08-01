@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
-from matplotlib import pyplot as plt
+# from matplotlib import pyplot as plt
+
 # sondan 2. 27.07 öncesi
 # bobinler HCT ile kesip arka planı siyah yapıyoruz ardından kontrast ve parlaklık ayarları.
 

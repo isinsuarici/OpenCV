@@ -30,7 +30,7 @@ plt.show()
 
 # 2.Adaptive Thresholding
 # simple thresholdingten farklı olarak, adaptive thresholding değişen ortam ışıklarına uyum sağlayabilir.
-# örn fotonun solunda ışık var ama sağında yoksa soldaki threshold değeri sağdakinden farklı olacak.
+# örn fotonun solunda ışık var ama sağında yoksa soldaki threshold değeri sağdakindmen farklı olacak.
 img_blur = cv.medianBlur(gray, 5)
 cv.imwrite('img_blur.png', img_blur)
 x, thresh_binary = cv.threshold(gray, 127, 255, cv.THRESH_BINARY)
