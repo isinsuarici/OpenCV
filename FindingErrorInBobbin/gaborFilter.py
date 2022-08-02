@@ -34,7 +34,7 @@ cropped_image = img[0:int(w / 2), 0:int(h / 2)]
 cv.imshow("Resized image", cropped_image)
 cv.waitKey(0)
 cv.destroyAllWindows()
-cv.imwrite('thresh_otsu.png', cropped_image)
+cv.imwrite('cropped_image.png', cropped_image)
 
 # img_blur = cv.medianBlur(gray, 5)
 # cv.imwrite('img_blur.png', img_blur)

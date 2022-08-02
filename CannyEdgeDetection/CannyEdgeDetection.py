@@ -10,4 +10,5 @@ import cv2 as cv
 
 gray = cv.imread("../input_pictures/input_agac.png", 0)
 edges = cv.Canny(gray, 100, 200)  # 2.arg=minVal, 3.arg=maxVal
-cv.imwrite('edges.png', edges)
+cv.imshow('edges', edges)
+cv.waitKey(0)
